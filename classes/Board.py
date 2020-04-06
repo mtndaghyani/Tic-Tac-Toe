@@ -9,6 +9,9 @@ class Board:
     def __init__(self):
         self.board = [["   " for i in range(3)] for j in range(3)]
 
+    def get_board(self):
+        return self.board
+
     def mark_box(self, player, x, y):
         self.board[x][y] = f' {player.symbol} '
 
