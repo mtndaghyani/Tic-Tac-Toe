@@ -6,7 +6,7 @@ from classes.User import User
 def evaluate_state(board, player):
     """Evaluates the value of the current state of the board"""
     current_state = check_game_state(board)
-    if current_state == player.symbol:
+    if current_state == player.symbol == " X ":
         return 10
     elif current_state == "draw":
         return 0
@@ -31,8 +31,8 @@ def minimax(board, player1, player2, last_row, last_col):
                     result = minimax(board, player2, player1, i, j)
                     if result[0] > score:
                         score = result[0]
-                        x = result[1]
-                        y = result[2]
+                        x = i
+                        y = j
                     board[i][j] = "   "
         return score, x, y
     else:
@@ -44,12 +44,12 @@ def minimax(board, player1, player2, last_row, last_col):
                     result = minimax(board, player2, player1, i, j)
                     if result[0] < score:
                         score = result[0]
-                        x = result[1]
-                        y = result[2]
+                        x = i
+                        y = j
                     board[i][j] = "   "
         return score, x, y
 
 
 if __name__ == "__main__":
 
-    print(minimax([[" O ", " X ", "   "], ["   ", " O ", "   "], ["   ", "   ", "   "]], Bot(" X "), User(" O "), 0, 0))
+    print(minimax([[" X ", " O ", " X "], [" O ", " O ", " X "], ["   ", "   ", "   "]], Bot(" X "), User(" O "), 0, 0))
