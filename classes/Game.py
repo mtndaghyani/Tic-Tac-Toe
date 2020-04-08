@@ -1,20 +1,42 @@
-def check_game_state(board):
-    # Checking rows
-    for row in board:
-        if row[0] == row[1] == row[2] != "   ":
-            return row[0]
-    # Checking columns
-    for column in range(3):
-        if board[0][column] == board[1][column] == board[2][column] != "   ":
-            return board[0][column]
-    # Checking diameters:
-    if board[0][0] == board[1][1] == board[2][2] != "   ":
-        return board[0][0]
-    if board[0][2] == board[1][1] == board[2][0] != "   ":
-        return board[0][2]
-    # Checking draw state
-    for row in board:
-        if any([x == "   " for x in row]):
-            return None
+from classes.Board import Board
+from classes.Bot import Bot, check_game_state
+from classes.User import User
 
-    return "draw"
+
+def _play_game(players, board):
+    while True:
+        for player in players:
+            x, y = player.choose_box(board=board.board, player=player)
+            board.mark_box(player, x, y)
+            print(board, end="\n" * 3)
+            status = check_game_state(board.board)
+            if status is not None:
+                return status
+
+
+def _get_game_result(status, players):
+    if status == "draw":
+        print("DRAW")
+    elif status == f' {players[0].symbol} ':
+        print("THAT'S GREAT!! YOU WON ;)")
+    else:
+        print("YOU LOST :(")
+
+
+def run():
+    while True:
+        player_symbol = input("Choose your symbol: X/O ?")
+        if player_symbol == "O" or player_symbol == "X":
+            print("Let's start!!")
+            print("=" * 20)
+            break
+        print("Oops! Wrong input!! Try again")
+    if player_symbol == "X":
+        bot_symbol = "O"
+    else:
+        bot_symbol = "X"
+    user = User(player_symbol)
+    bot = Bot(bot_symbol)
+    players = [user, bot]
+    board = Board()
+    _get_game_result(_play_game(players, board), players)

@@ -21,10 +21,3 @@ class Board:
             result.append("|".join(i))
         return str(("\n" + "----" * 3 + "\n").join(result))
 
-
-if __name__ == "__main__":
-    board = Board()
-    user = User("o")
-    i, j = user.choose_box()
-    board.mark_box(user, i, j)
-    print(board)
