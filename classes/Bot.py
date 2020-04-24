@@ -25,7 +25,7 @@ def check_game_state(board):
 def evaluate_state(board, player, depth):
     """Evaluates the value of the current state of the board"""
     current_state = check_game_state(board)
-    if current_state == player.symbol == " X ":
+    if current_state == f' {player.symbol} ' == " X ":
         return 10 - depth
     elif current_state == "draw":
         return 0
@@ -35,7 +35,7 @@ def evaluate_state(board, player, depth):
         return -10 + depth
 
 
-def minimax(board, player1, player2, last_row=0, last_col=0, depth = 0):
+def minimax(board, player1, player2, last_row=0, last_col=0, depth=0):
     """Finds the best choice among free boxes using MINIMAX algorithm"""
     current_state = evaluate_state(board, player2, depth)
     if current_state is not None:
