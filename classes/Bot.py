@@ -1,4 +1,5 @@
 from classes._Player import _Player
+import classes.Game as game
 
 
 def check_game_state(board):
@@ -25,7 +26,7 @@ def check_game_state(board):
 def evaluate_state(board, player, depth):
     """Evaluates the value of the current state of the board"""
     current_state = check_game_state(board)
-    if current_state == f' {player.symbol} ' == " X ":
+    if current_state == f' {player.symbol} ' == f' {game.BOT_SYMBOL} ':
         return 10 - depth
     elif current_state == "draw":
         return 0

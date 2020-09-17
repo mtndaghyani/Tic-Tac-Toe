@@ -1,6 +1,7 @@
 from classes.Board import Board
 from classes.Bot import Bot, check_game_state
 from classes.User import User
+BOT_SYMBOL = ""
 
 
 def _introduction():
@@ -46,6 +47,8 @@ def run():
     print(_introduction())
     user = User(player_symbol)
     bot = Bot(bot_symbol)
+    global BOT_SYMBOL
+    BOT_SYMBOL = bot_symbol
     players = [user, bot]
     board = Board()
     print(_get_game_result(_play_game(players, board), players))
